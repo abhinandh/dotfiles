@@ -1,1 +1,0 @@
-/home/abhinand/.config/i3

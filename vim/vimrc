@@ -1,1 +1,167 @@
-/home/abhinand/.vim/vimrc
+set nocompatible
+syntax enable
+set encoding=utf-8
+set showcmd                     " display incomplete commands
+filetype plugin indent on       " load file type plugins + indentation 
+set cpoptions+=$ 
+set mouse=a 
+set relativenumber 
+
+set background=dark
+set termguicolors
+
+set number
+set wildmenu
+set smarttab
+
+"" Whitespace
+set wrap                        " Soft wrap lines
+set colorcolumn=85
+set linebreak                   " Don't break words when wrapping
+set tabstop=4 shiftwidth=4      " a tab is two spaces 
+set expandtab                   " use spaces, not tabs
+set backspace=indent,eol,start  " backspace through everything in insert mode
+
+"" Searching
+set hlsearch                    " highlight matches
+set incsearch                   " incremental searching
+set ignorecase                  " searches are case insensitive...
+set smartcase                   " ... unless they contain at least one capital letter      
+
+" provide some context when editing
+set scrolloff=20
+
+" Highlight the current line under the cursor
+" set cursorline
+
+"" Tabs
+" map <S-Left> gT
+" map <S-Right> gt
+" map <S-Down> :tabedit<CR>
+" map <S-1> 1gt
+" map <S-2> 2gt
+" map <S-3> 3gt
+" map <S-4> 4gt
+" map <S-5> 5gt
+" map <S-6> 7gt
+" map <S-0> :tablast<SR>
+nnoremap <C-S-tab> :tabprevious<CR>
+nnoremap <C-tab>   :tabnext<CR>
+" nnoremap <C-t>     :tabnew<CR>
+inoremap <C-S-tab> <Esc>:tabprevious<CR>i
+inoremap <C-tab>   <Esc>:tabnext<CR>i
+" inoremap <C-t>     <Esc>:tabnew<CR>
+
+" easier navigation between split windows
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+let mapleader =","
+
+" double percentage sign in command mode is expanded
+" to directory of current file - http://vimcasts.org/e/14
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+
+nnoremap <leader><leader> <c-^>
+
+" ctags
+nnoremap <leader>r   <Esc>:!ctags --exclude='*.js' -R .<CR>
+
+" Shortcut to rapidly toggle `set list`
+nmap <leader>l :set list!<CR>
+ 
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬
+
+" Escape
+inoremap jj <Esc>
+
+set backupdir=~/.vim/_backup " where to put backup files.
+set directory=~/.vim/_temp " where to put swap files.
+
+if has("statusline") && !&cp
+  set laststatus=2 " always show the status bar
+endif
+
+" Supertab options
+let g:SuperTabDefaultCompletionType = "context"
+
+" NerdTree
+map <F2> :NERDTreeToggle<CR>
+let NERDTreeIgnore = ['\.pyc$']
+
+" TagBar
+nmap <F3> :TagbarToggle<CR>
+
+
+" Setup dictionaries for tab completion
+au FileType * exec("setlocal dictionary+=".$HOME."/.vim/dictionaries/".expand('<amatch>'))
+set complete+=k
+
+" Opening and closing braces
+imap <C-F> {<CR>}<C-O>O
+
+if exists(":Tabularize")
+  nmap <Leader>a= :Tabularize /=<CR>
+  vmap <Leader>a= :Tabularize /=<CR>
+  nmap <Leader>a: :Tabularize /:\zs<CR>
+  vmap <Leader>a: :Tabularize /:\zs<CR>
+endif
+
+let g:gitgutter_enabled = 0
+
+" let g:syntastic_enable_highlighting = 0
+
+autocmd FileType matlab set commentstring=%\ %s
+autocmd FileType sml set commentstring=(*\ %s\ *)
+
+set wildignore+=*.pyc,*.so,*.swp,*.zip  
+
+" Syntax of these languages is fussy over tabs Vs spaces
+autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
+
+set guifont=Droid\ Sans\ Mono\ Dotted\ for\ Powerline\ 12
+
+" let g:airline_powerline_fonts=1
+" let g:airline_enable_fugitive=1
+let g:airline#extensions#whitespace#enabled = 0
+
+" Ctrl-p
+let g:ctrlp_extensions = ['funky','switcher']
+
+" Line multi-line arguments
+set cino=(0
+
+" Don't prompt session outosave on quit.
+let g:session_autosave = 'no'
+
+set rtp+=~/.vim/bundle/Vundle.vim
+
+call vundle#begin()
+
+Plugin 'tpope/vim-fugitive'
+Plugin 'bling/vim-airline'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-commentary'
+Plugin 'majutsushi/tagbar'
+Plugin 'scrooloose/nerdtree'
+Plugin 'ervandew/supertab'
+Plugin 'ludovicchabant/vim-lawrencium'
+Plugin 'gmarik/Vundle.vim'
+Plugin 'tpope/vim-dispatch'
+Plugin 'morhetz/gruvbox'
+
+call vundle#end()            " required
+
+set t_Co=256
+hi Normal ctermfg=None ctermbg=None
+
+" gruvbox
+let g:gruvbox_invert_selection = 0
+let g:gruvbox_italic = 1
+let g:gruvbox_contrast_dark = 'soft'
+
+colorscheme gruvbox
+let g:airline_theme = 'gruvbox'
+
