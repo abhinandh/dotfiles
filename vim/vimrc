@@ -151,6 +151,7 @@ Plugin 'ludovicchabant/vim-lawrencium'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-dispatch'
 Plugin 'morhetz/gruvbox'
+Plugin 'rust-lang/rust.vim'
 
 call vundle#end()            " required
 

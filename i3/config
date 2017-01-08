@@ -181,6 +181,22 @@ bar {
         status_command i3blocks -c ~/.config/i3/i3blocks.conf
         tray_output primary
         font pango:Iosevka Term Medium 12
+        output DVI-D-0
+    
+        colors {
+                statusline          $text_active
+                background          $bg_bar
+                focused_workspace   $bg_active_workspace      $bg_active_workspace    $text_active    #00FF00
+                inactive_workspace  $bg_inactive_workspace    $bg_inactive_workspace  $text_inactive
+                active_workspace    $bg_inactive_workspace $bg_inactive_workspace $text_inactive
+        }
+}
+
+bar {
+        status_command i3blocks -c ~/.config/i3/i3blocks_min.conf
+        font pango:Iosevka Term Medium 12
+        output HDMI-0
+        tray_output primary
     
         colors {
                 statusline          $text_active
@@ -217,8 +233,8 @@ exec ~/.screenlayout/dual.sh
 
 bindsym $mod+x move workspace to output left
 bindsym $mod+Ctrl+2 exec ~/.screenlayout/dual.sh
-bindsym $mod+Ctrl+3 exec ~/.screenlayout/right.sh
 bindsym $mod+Ctrl+1 exec ~/.screenlayout/left.sh
+bindsym $mod+Ctrl+3 exec ~/.screenlayout/right.sh
 
 exec --no-startup-id xset s off s noblank -dpms
 
@@ -232,7 +248,7 @@ for_window [class="^.*"] border pixel 3
 
 # Wallpaper and compositor
 exec --no-startup-id nitrogen --restore
-exec --no-startup-id compton --backend glx --paint-on-overlay --glx-no-stencil --vsync opengl-swc --shadow-exclude "! name~=''" --config ~/.compton.conf -b
+exec --no-startup-id --config ~/.compton.conf -b
 
 # default apps
 exec dropbox start
